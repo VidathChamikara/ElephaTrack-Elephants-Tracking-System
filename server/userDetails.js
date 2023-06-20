@@ -2,9 +2,10 @@ const mongoose = require("mongoose");
 
 const UserDetailsScehma = new mongoose.Schema(
     {
-        uname: String,
+        fname: String,
+        lname: String,
         email: String,
-        phoneNo: String
+        password: String,
     },
     {
         collation: "UserInfo",
