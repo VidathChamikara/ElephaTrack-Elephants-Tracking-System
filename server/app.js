@@ -17,7 +17,7 @@ app.listen(5000,() => {
     console.log("server started");
 });
 
-app.post("/post", async (req,res) => {
+/*app.post("/post", async (req,res) => {
      console.log(req.body);
      const {data}=req.body;
 
@@ -31,3 +31,21 @@ app.post("/post", async (req,res) => {
         res.send({ status: "something went wrong try again"});
      }
 });
+
+require("./userDetails");
+
+const User = mongoose.model("UserInfo");
+
+app.post("/register", async (req, res) => {
+    const {name, email, mobileNo} = req.body;
+    try{
+        await User.create({
+            uname:name,
+            email,
+            phoneNo: mobileNo,
+        });
+        res.send({status:"ok"})
+    } catch (error) {
+        res.send({status:"error"})
+    }
+});*/
