@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 
 export default class UserDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userData: "",
+    };
+  } 
 
     componentDidMount(){
         fetch("http://localhost:5000/userData",{
@@ -17,13 +23,14 @@ export default class UserDetails extends Component {
           }).then((res) => res.json())
             .then((data) => {
               console.log(data, "userData");
+              this.setState({ userData: data.data});
             });
     }
     render() {
         return (
             <div>
-                Name<h1>Name</h1>
-                Email<h1>email@gmail.com</h1>
+                Name<h1>{this.state.userData.fname}</h1>
+                Email<h1>{this.state.userData.email}</h1>
             </div>
         )
     }
