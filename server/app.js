@@ -61,7 +61,9 @@ app.post("/login-user",async(req,res)=>{
     return res.json({ error: "User Not Found" });
   }
   if (await bcrypt.compare(password, user.password)) {
-    const token = jwt.sign({email:user.email}, JWT_SECRET);
+    const token = jwt.sign({email:user.email}, JWT_SECRET, {
+      expiresIn: 10,
+    });
     if (res.status(201)){
       return res.json({ status: "ok", data: token});
     }else{
@@ -74,8 +76,16 @@ app.post("/login-user",async(req,res)=>{
 app.post("/userData", async (req, res) => {
   const { token } = req.body;
   try{
-    const user=jwt.verify(token,JWT_SECRET);
+    const user=jwt.verify(token,JWT_SECRET, (err, res) => {
+      if (err) {
+        return "token expired";
+      }
+      return res;
+    });
     console.log(user);
+    if(user=="token expired"){
+      return res.send({ status: "error", data: "token expired"});
+    }
     const usermail = user.email;
     User.findOne({ email: usermail}).collation({})
     .then((data) => {
