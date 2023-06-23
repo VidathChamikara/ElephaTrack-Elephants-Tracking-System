@@ -32,6 +32,7 @@ export default class Login extends Component {
         if (data.status === "ok"){
           alert("Login Successful");
           window.localStorage.setItem("token", data.data);
+          window.localStorage.setItem("loggedIn", true);
           window.location.href="./userDetails"
         }
       });

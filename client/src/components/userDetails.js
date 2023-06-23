@@ -26,11 +26,17 @@ export default class UserDetails extends Component {
               this.setState({ userData: data.data});
             });
     }
+    logOut = () => {
+      window.localStorage.clear();
+      window.location.href = "./sign-in";
+    }
     render() {
         return (
             <div>
                 Name<h1>{this.state.userData.fname}</h1>
                 Email<h1>{this.state.userData.email}</h1>
+                <br />
+                <button type="submit" className="btn btn-primary" onClick={this.logOut}>Log Out</button>
             </div>
         )
     }
