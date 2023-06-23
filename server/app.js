@@ -71,6 +71,23 @@ app.post("/login-user",async(req,res)=>{
     res.json({ status: "error", error: "Invalid Password"});
 });
 
+app.post("/userData", async (req, res) => {
+  const { token } = req.body;
+  try{
+    const user=jwt.verify(token,JWT_SECRET);
+    const usermail = user.email;
+    user.findOne({ email: usermail})
+    .then((data) => {
+      res.send({ status: "ok", data: data});
+    })
+    .catch((error) => {
+      res.send({ status: "error", data: error});
+    });
+  }catch (error){
+
+  }
+});
+
 app.listen(5000, () => {
   console.log("server started");
 });
