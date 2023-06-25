@@ -43,11 +43,11 @@ export default class Login extends Component {
         <h3>Sign In</h3>
 
         <div className="mb-3">
-          <label>Email address</label>
+          <label>Phone Number</label>
           <input
-            type="email"
+            type="tel"
             className="form-control"
-            placeholder="Enter email"
+            placeholder="Enter phone number"
             onChange={(e) => this.setState({ email: e.target.value})}
           />
         </div>

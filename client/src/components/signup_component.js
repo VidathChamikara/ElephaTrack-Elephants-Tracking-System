@@ -98,6 +98,7 @@ export default class SignUp extends Component {
     }).then((res) => res.json())
       .then((data) => {
         console.log(data, "userRegister");
+        alert("Successfully Sign Up");
       });
     }else{
       alert("Please Verify Mobile");
