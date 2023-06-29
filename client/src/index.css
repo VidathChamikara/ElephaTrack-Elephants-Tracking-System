@@ -4,11 +4,14 @@
   box-sizing: border-box;
 }
 body {
-  background: #61e45f !important;
+ 
   min-height: 100vh;
   display: flex;
   font-weight: 400;
   font-family: "Fira Sans", sans-serif;
+  background-image: url('./images/elephant.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 h1,
