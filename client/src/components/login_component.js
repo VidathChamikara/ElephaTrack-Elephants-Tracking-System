@@ -49,7 +49,7 @@ export default class Login extends Component {
         <div className="mb-3">
           <label>Email</label>
           <input
-            type="tel"
+            type="email"
             className="form-control"
             placeholder="Enter email"
             onChange={(e) => this.setState({ email: e.target.value})}
@@ -85,7 +85,7 @@ export default class Login extends Component {
           </button>
         </div>
         <p className="forgot-password text-right">
-          Forgot <a href="#">password?</a>
+          Forgot <a href="/reset">password?</a>
         </p>
       </form>
     )

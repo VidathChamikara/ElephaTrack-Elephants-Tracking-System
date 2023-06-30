@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Login from "./components/login_component";
 import SignUp from "./components/signup_component";
 import UserDetails from "./components/userDetails";
+import Reset from "./components/reset";
 
 function App() {
   const isLoggedIn = window.localStorage.getItem("loggedIn");
@@ -41,6 +42,7 @@ function App() {
               <Route path="/sign-in" element={<Login />} />
               <Route path="/sign-up" element={<SignUp />} />
               <Route path="/userDetails" element={< UserDetails />} />
+              <Route path="/reset" element={< Reset />} />
             </Routes>
           </div>
         </div>
