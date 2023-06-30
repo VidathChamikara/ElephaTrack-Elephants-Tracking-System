@@ -9,6 +9,7 @@ export default class SignUp extends Component {
     this.state = {
       fname: "",
       lname: "",
+      email:"",
       mobile: "",
       password: "",
       verifyButton: false,
@@ -79,8 +80,8 @@ export default class SignUp extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if(this.state.verified){
-      const { fname, lname, mobile, password} = this.state;
-    console.log( fname, lname, mobile, password);
+      const { fname, lname, email, password, mobile } = this.state;
+    console.log( fname, lname, email, password, mobile);
     fetch("http://localhost:5000/register",{
       method:"POST",
       crossDomain:true,
@@ -92,13 +93,19 @@ export default class SignUp extends Component {
       body:JSON.stringify({
         fname,
         lname,
-        email: mobile,
+        email,
         password,
+        mobile,
       }),
     }).then((res) => res.json())
       .then((data) => {
-        console.log(data, "userRegister");
-        alert("Successfully Sign Up");
+        console.log(data, "Data pass to api");
+        if (data.status === "User Exists") {
+          alert("User Exists.Can not sign up again");
+        } else if (data.status === "ok") {
+          alert("Successfully Sign Up");
+        }   
+        window.location.reload();
       });
     }else{
       alert("Please Verify Mobile");
@@ -123,6 +130,11 @@ export default class SignUp extends Component {
         <div className="mb-3">
           <label>Last name</label>
           <input type="text" className="form-control" placeholder="Last name" onChange={(e) => this.setState({ lname: e.target.value})}/>
+        </div>
+
+        <div className="mb-3">
+          <label>Email</label>
+          <input type="email" className="form-control" placeholder="Email" onChange={(e) => this.setState({ email: e.target.value})}/>
         </div>
 
         <div className="mb-3">

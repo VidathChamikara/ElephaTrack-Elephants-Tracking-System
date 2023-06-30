@@ -27,13 +27,17 @@ export default class Login extends Component {
       }),
     }).then((res) => res.json())
       .then((data) => {
-        console.log(data, "userRegister");
+        console.log(data, "Data pass to api");
         
-        if (data.status === "ok"){
+        if (data.error === "User Not Found") {
+          alert("User not found");
+        } else if (data.error === "Invalid Password") {
+          alert("Invalid password");
+        } else if (data.status === "ok") {
           alert("Login Successful");
           window.localStorage.setItem("token", data.data);
           window.localStorage.setItem("loggedIn", true);
-          window.location.href="./userDetails"
+          window.location.href = "./userDetails";
         }
       });
   }
@@ -43,11 +47,11 @@ export default class Login extends Component {
         <h3>Sign In</h3>
 
         <div className="mb-3">
-          <label>Phone Number</label>
+          <label>Email</label>
           <input
             type="tel"
             className="form-control"
-            placeholder="Enter phone number"
+            placeholder="Enter email"
             onChange={(e) => this.setState({ email: e.target.value})}
           />
         </div>
