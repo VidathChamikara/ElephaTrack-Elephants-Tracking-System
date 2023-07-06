@@ -7,6 +7,7 @@ const UserDetailsScehma = new mongoose.Schema(
     email: String,
     password: String,
     mobile: String,
+    userType: String,
   },
   {
     collation: "UserInfo",

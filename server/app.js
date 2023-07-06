@@ -26,7 +26,7 @@ require("./userDetails");
 
 const User = mongoose.model("UserInfo");
 app.post("/register", async (req, res) => {
-  const { fname, lname, email, password, mobile } = req.body;
+  const { fname, lname, email, password, mobile, userType } = req.body;
 
   const encryptedPassword = await bcrypt.hash(password, 10);
 
@@ -43,6 +43,7 @@ app.post("/register", async (req, res) => {
       email,
       password: encryptedPassword,
       mobile,
+      userType,
     });
     res.send({ status: "ok" });
   } catch (error) {
@@ -124,6 +125,14 @@ app.get("/reset-password/:id/:token", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.send("Not Verified");
+  }
+});
+app.get("/getAllUser", async (req, res) => {
+  try {
+    const allUser = await User.find({}).collation({});
+    res.send({ status: "ok", data: allUser });
+  } catch (error) {
+    console.log(error);
   }
 });
 
