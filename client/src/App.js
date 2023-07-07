@@ -7,6 +7,8 @@ import Login from "./components/login_component";
 import SignUp from "./components/signup_component";
 import UserDetails from "./components/userDetails";
 import Reset from "./components/reset";
+import LocationForm from "./components/LocationForm";
+import UserHome from "./components/userHome";
 
 function App() {
   const isLoggedIn = window.localStorage.getItem("loggedIn");
@@ -43,6 +45,8 @@ function App() {
               <Route path="/sign-up" element={<SignUp />} />
               <Route path="/userDetails" element={< UserDetails />} />
               <Route path="/reset" element={< Reset />} />
+              <Route path="/locationForm" element={< LocationForm />} />
+              <Route path="/userHome" element={< UserHome />} />
             </Routes>
           </div>
         </div>

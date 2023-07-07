@@ -136,6 +136,21 @@ app.get("/getAllUser", async (req, res) => {
   }
 });
 
+require("./location");
+const Location = mongoose.model("LocationInfo");
+app.post("/location", async (req, res) => {
+const { latitude, longitude } = req.body;
+try {
+ Location.create({
+      latitude,
+      longitude, 
+    });
+ res.send({ status: "ok" });
+  } catch (error) {
+    res.send({ status: "error" });
+  }
+});
+
 app.listen(5000, () => {
   console.log("server started");
 });
