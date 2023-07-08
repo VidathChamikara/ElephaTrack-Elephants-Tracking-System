@@ -24,7 +24,7 @@ export default class UserHome extends Component {
               }}
             >
               <div className="card-body text-center">
-              <a href=""> <div className="circle-image">
+              <a href="/locationMap"> <div className="circle-image">
                   <img src={Ele} alt="Card 1" />
                 </div></a>
                 <h5 className="card-title">View</h5>

@@ -9,6 +9,7 @@ import UserDetails from "./components/userDetails";
 import Reset from "./components/reset";
 import LocationForm from "./components/LocationForm";
 import UserHome from "./components/userHome";
+import LocationMap from "./components/LocationMap";
 
 function App() {
   const isLoggedIn = window.localStorage.getItem("loggedIn");
@@ -47,6 +48,7 @@ function App() {
               <Route path="/reset" element={< Reset />} />
               <Route path="/locationForm" element={< LocationForm />} />
               <Route path="/userHome" element={< UserHome />} />
+              <Route path="/locationMap" element={< LocationMap />} />
             </Routes>
           </div>
         </div>

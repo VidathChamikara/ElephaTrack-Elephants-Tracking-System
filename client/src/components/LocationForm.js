@@ -9,6 +9,8 @@ class LocationForm extends Component {
       latitude: null,
       longitude: null,
       error: null,
+      currentDateTime: "",
+      locationName:"",
     };
   }
 
@@ -17,7 +19,8 @@ class LocationForm extends Component {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          this.setState({ latitude, longitude });
+          const currentDateTime = format(new Date(), "MMMM dd, yyyy - HH:mm:ss");
+          this.setState({ latitude, longitude, currentDateTime });
         },
         (error) => {
           this.setState({ error: error.message });
@@ -28,16 +31,23 @@ class LocationForm extends Component {
     }
   }
 
+  handleLocationNameChange = (e) => {
+    this.setState({ locationName: e.target.value });
+  };
+  
+
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { latitude, longitude } = this.state;
+    const { latitude, longitude, currentDateTime, locationName } = this.state;
 
     try {
       await axios.post("http://localhost:5000/location", {
         latitude,
         longitude,
+        currentDateTime,
+        locationName,
       });
-      alert("Location stored successfully.");
+      alert("Location stored successfully or already added.");
     } catch (error) {
       console.error("Error storing location:", error);
       alert("Error storing location.");
@@ -45,8 +55,9 @@ class LocationForm extends Component {
   };
 
   render() {
-    const { latitude, longitude, error } = this.state;
     const currentDateTime = format(new Date(), "MMMM dd, yyyy - HH:mm:ss");
+    const { latitude, longitude, error, locationName } = this.state;
+   
 
     if (error) {
       return <p>Error: {error}</p>;
@@ -65,6 +76,16 @@ class LocationForm extends Component {
             <strong>Longitude:</strong> {longitude}
           </p>
           <form onSubmit={this.handleSubmit}>
+          <div  className="mb-3">
+            <label htmlFor="locationName" className="form-label">Location Name:</label>
+            <input
+              type="text"
+              id="locationName"
+              value={locationName}
+              onChange={this.handleLocationNameChange}
+              className="form-control"
+            />
+          </div>
             <button className="btn btn-outline-primary" type="submit">
               Store Elephant Time & Location
             </button>

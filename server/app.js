@@ -139,15 +139,31 @@ app.get("/getAllUser", async (req, res) => {
 require("./location");
 const Location = mongoose.model("LocationInfo");
 app.post("/location", async (req, res) => {
-const { latitude, longitude } = req.body;
-try {
- Location.create({
+  const { latitude, longitude, currentDateTime, locationName } = req.body;
+  try {
+    const oldLocation = await Location.findOne({ latitude,longitude }).collation({});
+
+    if (oldLocation) {
+      return res.send({ status: "Elephant Exists" });
+    }
+    Location.create({
       latitude,
-      longitude, 
+      longitude,
+      currentDateTime,
+      locationName,
     });
- res.send({ status: "ok" });
+    res.send({ status: "ok" });
   } catch (error) {
     res.send({ status: "error" });
+  }
+});
+
+app.get("/getAllLocation", async (req, res) => {
+  try {
+    const allLocation = await Location.find({}).collation({});
+    res.send({ status: "ok", data: allLocation });
+  } catch (error) {
+    console.log(error);
   }
 });
 
