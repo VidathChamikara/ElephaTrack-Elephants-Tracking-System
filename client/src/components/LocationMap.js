@@ -22,7 +22,7 @@ const LocationMap = () => {
   const renderMap = () => {
     // Load the Google Maps API asynchronously
     const script = document.createElement('script');
-    script.src =  'https://maps.googleapis.com/maps/api/js?key=AIzaSyAOqrItiQtWOcaaNQbtRyVPYlsFuAwV9n0';
+    script.src =  'https://maps.googleapis.com/maps/api/js?key=Your_Api_Key';
     script.async = true;
     script.onload = () => {
       const map = new window.google.maps.Map(document.getElementById('map'), {
